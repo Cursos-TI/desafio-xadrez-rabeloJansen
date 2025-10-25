@@ -1,14 +1,44 @@
 #include <stdio.h>
 
-// Desafio de Xadrez - MateCheck
-// Este código inicial serve como base para o desenvolvimento do sistema de movimentação das peças de xadrez.
-// O objetivo é utilizar estruturas de repetição e funções para determinar os limites de movimentação dentro do jogo.
+    // Desafio de Xadrez - MateCheck
+    // Este código inicial serve como base para o desenvolvimento do sistema de movimentação das peças de xadrez.
+    // O objetivo é utilizar estruturas de repetição e funções para determinar os limites de movimentação dentro do jogo.
+
+    // Nível Mestre - Funções Recursivas e Loops Aninhados
+    void moveAxisXpositive(int action) {
+        if (action > 0) {        
+            moveAxisXpositive(action - 1);
+            printf("Movimentou %d casas para DIREITA\n", action);
+        }
+    }
+
+    void moveAxisXnegative(int action) {
+        if (action > 0) {        
+            moveAxisXnegative(action - 1);
+            printf("Movimentou %d casas para ESQUERDA\n", action);
+        }
+    }
+
+    void moveAxisYpositive(int action) {
+        if (action > 0) {        
+            moveAxisYpositive(action - 1);
+            printf("Movimentou %d casas para CIMA\n", action);
+        }
+    }
+
+    void moveAxisYnegative(int action) {
+        if (action > 0) {        
+            moveAxisYnegative(action - 1);
+            printf("Movimentou %d casas para BAIXO\n", action);
+        }
+    }
 
 int main() {
     // Nível Novato - Movimentação das Peças
     // Sugestão: Declare variáveis constantes para representar o número de casas que cada peça pode se mover.
+    // Inclua o uso de continue e break dentro dos loops.
 
-    int mainMenu = 0, playerChoice = 0, queenPosition = 0, bishopPosition = 0, towerPosition = 0, horsePosition = 1;
+    int mainMenu = 0, playerChoice = 0, queenPosition = 0, bishopPosition = 0, horsePosition = 1;
     
     printf("### Chess Simulator ###\n");
         printf("\n");    
@@ -38,7 +68,7 @@ int main() {
                 continue;
         }
 
-        while (mainMenu != 4) {
+        while (mainMenu != 5) {
             printf("Escolha uma PEÇA do tabuleiro:\n");
             printf("(1) ♛ RAINHA\n");
             printf("(2) ♝ BISPO\n");
@@ -57,6 +87,7 @@ int main() {
 
     // Implementação de Movimentação da Rainha
     // Sugestão: Utilize uma estrutura de repetição para simular a movimentação da Rainha para a esquerda.
+    // Sugestão: Substitua as movimentações das peças por funções recursivas.
                 case 1:
                     printf("Você escolheu ♛ RAINHA.\n");
                     printf("\n");
@@ -67,12 +98,16 @@ int main() {
                             scanf("%d", &playerChoice);
                         printf("\n");
 
-                        // Opção de estrutura de repetição utilizando WHILE
+                        // Opção de estrutura de repetição avançada utilizando RECURSÃO
+                        moveAxisXnegative(8);
+
+                        /* Opção de estrutura de repetição utilizando WHILE
                         while (queenPosition < 8) {
                             queenPosition++;
-                            printf("A RAINHA se movimentou: %d casas para a ESQUERDA\n", queenPosition);
+                            printf("A ♛ RAINHA se movimentou: %d casas para a ESQUERDA\n", queenPosition);
                         }
-                        printf("A posição atual da RAINHA ♕ é: %d casas para a ESQUERDA\n", queenPosition);  
+                        printf("A posição atual da ♛ RAINHA é: %d casas para a ESQUERDA\n", queenPosition);  
+                        */
 
                     break;
 
@@ -87,13 +122,27 @@ int main() {
                         printf("Escolha uma opção: ");
                             scanf("%d", &playerChoice);
                         printf("\n");
-                        
-                        // Opção de estrutura de repetição utilizando DO WHILE
-                        do {
+
+                        // Opção de estrutura de repetição avançada utilizando RECURSÃO e com loops aninhados
+                        while (bishopPosition <= 5) {
                             bishopPosition++;
-                            printf("O BISPO se movimentou: %d casas na DIAGONAL PARA CIMA E A DIREITA\n", bishopPosition);
-                        } while (bishopPosition < 5);
-                        printf("A posição atual do BISPO ♗ é: %d casas na DIAGONAL PARA CIMA E A DIREITA\n", bishopPosition);
+                            moveAxisYpositive(5);
+                                while (bishopPosition <= 5){
+                                    moveAxisXpositive(5);
+                                    break;
+                                }
+                            break;
+                        }                        
+                        
+                        /* Opção de estrutura de repetição avançada utilizando FOR
+                        for (bishopAxisX = 1, bishopAxisY = 1; bishopAxisX < 5, bishopAxisY < 5; bishopAxisX++, bishopAxisY++) {
+                            printf("O ♝ BISPO se movimentou: %d casas para a CIMA\n", bishopAxisX);
+                            printf("O ♝ BISPO se movimentou: %d casas para a DIREITA\n", bishopAxisY);
+                        }
+                        printf("O ♝ BISPO se movimentou: %d casas para a CIMA\n", bishopAxisX);
+                        printf("O ♝ BISPO se movimentou: %d casas para a DIREITA\n", bishopAxisY);
+                        printf("A posição atual do ♝ BISPO é: %d casas para CIMA e %d casas para a DIREITA\n", bishopAxisX, bishopAxisY);
+                        */
 
                     break;
 
@@ -109,37 +158,42 @@ int main() {
                             scanf("%d", &playerChoice);
                         printf("\n");
 
-                        // Opção de estrutura de repetição utilizando FOR
-                        for (towerPosition = 1; towerPosition < 5; towerPosition++) {
-                        printf("A TORRE se movimentou: %d casas para a DIREITA\n", towerPosition);
-                        }
-                        printf("A posição atual da TORRE ♖ é: %d casas a DIREITA\n", towerPosition);
+                        // Opção de estrutura de repetição avançada utilizando RECURSÃO
+                        moveAxisXpositive(5);
+
+                        /* Opção de estrutura de repetição utilizando DO WHILE
+                        do {
+                            towerPosition++;
+                            printf("A ♖ TORRE se movimentou: %d casas para a DIREITA\n", towerPosition);
+                        } while (towerPosition < 5);
+                        printf("A posição atual da ♖ TORRE é: %d casas a DIREITA\n", towerPosition);
+                        */
 
                     break;
 
     // Nível Aventureiro - Movimentação do Cavalo
     // Sugestão: Utilize loops aninhados para simular a movimentação do Cavalo em L.
     // Um loop pode representar a movimentação horizontal e outro vertical.
+    // Sugestão: Implemente a movimentação do Cavalo utilizando loops com variáveis múltiplas e condições avançadas.
                 case 4:
                     printf("Você escolheu ♞ CAVALO.\n");
                     printf("\n");
                     printf("Movimento disponíveis:\n");
-                        printf("(1) 2 CASAS PARA BAIXO E 1 CASA PARA A ESQUERDA\n");
+                        printf("(1) 2 CASAS PARA CIMA E 1 CASA PARA A DIREITA\n");
                         printf("\n");
                         printf("Escolha uma opção: ");
                             scanf("%d", &playerChoice);
                         printf("\n");
 
                         // Opção de estrutura de repetição aninhada utilizando WHILE + FOR
-                        while (horsePosition--) {
+                        while (horsePosition++) {
                             int move1 = 0, move2 = 0;
                             horsePosition = 0;                      
                             for (move1 = 0; move1 <= 1; move1++) {
-                                printf("O CAVALO se movimentou: %d casas para BAIXO\n", move1 + 1);
+                                printf("Movimentou %d casas para CIMA\n", move1 + 1);
                             }
                             move2++;                            
-                            printf("O CAVALO se movimentou: %d casa para ESQUERDA\n", move2);
-                            printf("A posição atual do CAVALO ♘ é: %d casas para BAIXO e %d casa para ESQUERDA\n", move1, move2);
+                            printf("Movimentou %d casas para DIREITA\n", move2);
                         }
 
                     break;
@@ -161,11 +215,4 @@ int main() {
         }
     }
     return 0; 
-}            
-
-    // Nível Mestre - Funções Recursivas e Loops Aninhados
-    // Sugestão: Substitua as movimentações das peças por funções recursivas.
-    // Exemplo: Crie uma função recursiva para o movimento do Bispo.
-
-    // Sugestão: Implemente a movimentação do Cavalo utilizando loops com variáveis múltiplas e condições avançadas.
-    // Inclua o uso de continue e break dentro dos loops.
+}
