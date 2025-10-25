@@ -8,7 +8,7 @@ int main() {
     // Nível Novato - Movimentação das Peças
     // Sugestão: Declare variáveis constantes para representar o número de casas que cada peça pode se mover.
 
-    int mainMenu = 0, playerChoice = 0, queenPosition = 0, bishopPosition = 0,towerPosition = 0;
+    int mainMenu = 0, playerChoice = 0, queenPosition = 0, bishopPosition = 0, towerPosition = 0, horsePosition = 1;
     
     printf("### Chess Simulator ###\n");
         printf("\n");    
@@ -38,13 +38,16 @@ int main() {
                 continue;
         }
 
-        while (mainMenu != 4) {        
+        while (mainMenu != 4) {
             printf("Escolha uma PEÇA do tabuleiro:\n");
             printf("(1) ♛ RAINHA\n");
             printf("(2) ♝ BISPO\n");
             printf("(3) ♜ TORRE\n");
-            printf("(4) Voltar ao MENU INICIAL\n");
-            printf("(5) Encerrar o jogo.\n");
+            printf("(4) ♞ CAVALO\n");
+            printf("\n");
+            printf("Outras opções:\n");
+            printf("(5) Voltar ao MENU INICIAL\n");
+            printf("(6) Encerrar o jogo.\n");
             printf("\n");
             printf("Escolha uma opção: ");
                 scanf("%d", &mainMenu);
@@ -113,10 +116,38 @@ int main() {
                         printf("A posição atual da TORRE ♖ é: %d casas a DIREITA\n", towerPosition);
 
                     break;
+
+    // Nível Aventureiro - Movimentação do Cavalo
+    // Sugestão: Utilize loops aninhados para simular a movimentação do Cavalo em L.
+    // Um loop pode representar a movimentação horizontal e outro vertical.
                 case 4:
+                    printf("Você escolheu ♞ CAVALO.\n");
+                    printf("\n");
+                    printf("Movimento disponíveis:\n");
+                        printf("(1) 2 CASAS PARA BAIXO E 1 CASA PARA A ESQUERDA\n");
+                        printf("\n");
+                        printf("Escolha uma opção: ");
+                            scanf("%d", &playerChoice);
+                        printf("\n");
+
+                        // Opção de estrutura de repetição aninhada utilizando WHILE + FOR
+                        while (horsePosition--) {
+                            int move1 = 0, move2 = 0;
+                            horsePosition = 0;                      
+                            for (move1 = 0; move1 <= 1; move1++) {
+                                printf("O CAVALO se movimentou: %d casas para BAIXO\n", move1 + 1);
+                            }
+                            move2++;                            
+                            printf("O CAVALO se movimentou: %d casa para ESQUERDA\n", move2);
+                            printf("A posição atual do CAVALO ♘ é: %d casas para BAIXO e %d casa para ESQUERDA\n", move1, move2);
+                        }
+
+                    break;
+
+                case 5:
                     printf("Voltando ao MENU INICIAL...\n");
                     break;
-                case 5:
+                case 6:
                     printf("Saindo do jogo... Até a próxima!\n");
                     printf("Pressione ENTER para sair.\n");
                     getchar();
@@ -131,10 +162,6 @@ int main() {
     }
     return 0; 
 }            
-
-    // Nível Aventureiro - Movimentação do Cavalo
-    // Sugestão: Utilize loops aninhados para simular a movimentação do Cavalo em L.
-    // Um loop pode representar a movimentação horizontal e outro vertical.
 
     // Nível Mestre - Funções Recursivas e Loops Aninhados
     // Sugestão: Substitua as movimentações das peças por funções recursivas.
